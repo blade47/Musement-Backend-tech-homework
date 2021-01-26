@@ -14,6 +14,17 @@ use Config;
  */
 class Remote
 {
+    private $conn_;
+
+    public function __construct()
+    {
+        Log::info('Initializing a new Connection instance', [
+            'file' => __FILE__,
+            'line' => __LINE__
+        ]);
+        $this->conn_ = new Connection();
+    }
+
     /**
      * Get the Musement Cities from the Musement API Endpoint
      *
@@ -26,8 +37,7 @@ class Remote
             'line' => __LINE__
         ]);
 
-        $conn = new Connection();
-        return $conn->get(Config::MUSEMENT_ENDPOINT);
+        return $this->conn_->get(Config::MUSEMENT_ENDPOINT);
     }
     
     /**
@@ -54,7 +64,6 @@ class Remote
             'line' => __LINE__
         ]);
 
-        $conn = new Connection();
-        return $conn->get(Config::WEATHERAPI_ENDPOINT, $weatherapi_params);
+        return $this->conn_->get(Config::WEATHERAPI_ENDPOINT, $weatherapi_params);
     }
 }
